@@ -1,3 +1,5 @@
+import UsersList from "./usersList/usersList";
+import users from "../users.json";
 export const App = () => {
   return (
     <div
@@ -10,7 +12,7 @@ export const App = () => {
         color: '#010101'
       }}
     >
-      React homework template
+     <UsersList users={users}/>
     </div>
   );
 };
