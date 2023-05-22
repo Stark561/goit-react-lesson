@@ -4,7 +4,7 @@ const UsersList = ({users}) => {
             <p>Name: {name}</p>
             <p>UserName: {username}</p>
             <p>email: {email}</p>
-            <img src={avatarUrl} alt=""/>
+            <img src={avatarUrl} alt={avatarUrl}/>
             <p>address:{street},{city} </p>
         </li>
     })
