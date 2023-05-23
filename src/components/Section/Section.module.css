@@ -1,0 +1,11 @@
+.baseSection {
+  max-width: 600px;
+  padding: 10px 20px;
+  margin: 0 auto;
+  background-color: antiquewhite;
+}
+
+.superSection {
+  composes: baseSection;
+  background-color: aquamarine;
+}

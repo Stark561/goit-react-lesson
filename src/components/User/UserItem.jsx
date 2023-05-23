@@ -1,4 +1,6 @@
 import PropTypes from 'prop-types';
+import Section from 'components/Section/Section';
+import { NativeText, Title } from './User.styled';
 
 export const UserItem = ({
   name,
@@ -7,16 +9,21 @@ export const UserItem = ({
   avatarUrl,
   address: { street, city },
 }) => {
+  const isEndedBiz = email.endsWith('biz');
   return (
-    <li>
-      <p>Name: {name}</p>
-      <p>UserName: {username}</p>
-      <p>email: {email}</p>
-      <img src={avatarUrl} alt={name} />
-      <p>
-        address:{street},{city}
-      </p>
-    </li>
+    <Section>
+      <li>
+        <Title>
+          Name: <NativeText isEndedBiz={isEndedBiz}>{name}</NativeText>
+        </Title>
+        <p>UserName: {username}</p>
+        <p>email: {email}</p>
+        <img src={avatarUrl} alt={name} />
+        <p>
+          address:{street},{city}
+        </p>
+      </li>
+    </Section>
   );
 };
 

@@ -9,7 +9,7 @@
 //         </li>
 //     })
 import PropTypes from 'prop-types';
-import { UserItem } from './UserItem';
+import { UserItem } from '../User/UserItem';
 
 export const UsersList = ({ users }) => {
   return (
