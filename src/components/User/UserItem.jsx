@@ -1,13 +1,16 @@
 import PropTypes from 'prop-types';
 import Section from 'components/Section/Section';
 import { NativeText, Title } from './User.styled';
+import { StyledBtn } from './User.styled';
 
 export const UserItem = ({
+  id,
   name,
   username,
   email,
   avatarUrl,
   address: { street, city },
+  userDelete,
 }) => {
   const isEndedBiz = email.endsWith('biz');
   return (
@@ -23,6 +26,7 @@ export const UserItem = ({
           address:{street},{city}
         </p>
       </li>
+      <StyledBtn onClick={() => userDelete(id)}>Delete</StyledBtn>
     </Section>
   );
 };

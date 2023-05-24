@@ -11,11 +11,11 @@
 import PropTypes from 'prop-types';
 import { UserItem } from '../User/UserItem';
 
-export const UsersList = ({ users }) => {
+export const UsersList = ({ users, userDelete }) => {
   return (
     <ul>
       {users.map(user => (
-        <UserItem key={user.id} {...user} />
+        <UserItem key={user.id} userDelete={userDelete} {...user} />
       ))}
     </ul>
   );

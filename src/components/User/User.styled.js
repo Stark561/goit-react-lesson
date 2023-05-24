@@ -11,6 +11,13 @@ export const Title = styled.p`
   }
 `;
 
+export const StyledBtn = styled.button`
+  width: 80px;
+  height: 50px;
+  border-radius: 10px;
+  font-size: medium;
+`;
+
 export const NativeText = styled.span`
   ${Title}:hover & {
     background-color: white;
