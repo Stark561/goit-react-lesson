@@ -11,6 +11,8 @@ export const UserItem = ({
   avatarUrl,
   address: { street, city },
   userDelete,
+  changeJob,
+  hasJob,
 }) => {
   const isEndedBiz = email.endsWith('biz');
   return (
@@ -25,8 +27,10 @@ export const UserItem = ({
         <p>
           address:{street},{city}
         </p>
+        <Title>Has Job : {`${hasJob}`}</Title>
       </li>
       <StyledBtn onClick={() => userDelete(id)}>Delete</StyledBtn>
+      <StyledBtn onClick={() => changeJob(id)}>Change user status</StyledBtn>
     </Section>
   );
 };

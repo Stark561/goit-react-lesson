@@ -12,7 +12,7 @@ export const Title = styled.p`
 `;
 
 export const StyledBtn = styled.button`
-  width: 80px;
+  min-width: 80px;
   height: 50px;
   border-radius: 10px;
   font-size: medium;
