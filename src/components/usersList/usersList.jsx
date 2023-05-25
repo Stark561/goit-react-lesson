@@ -28,7 +28,10 @@ export const UsersList = ({ users, userDelete, changeStat }) => {
 UsersList.propTypes = {
   users: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      id: PropTypes.oneOfType([
+        PropTypes.string.isRequired,
+        PropTypes.number.isRequired,
+      ]),
     }).isRequired
   ).isRequired,
 };
