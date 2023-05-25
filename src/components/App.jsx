@@ -3,7 +3,7 @@ import { UsersList } from './usersList/usersList';
 import data from '../users.json';
 import Section from './Section/Section';
 import Button from './Button/Button';
-import Form from './Form/Form';
+// import Form from './Form/Form';
 import FormikForm from './Form/FormikForm';
 import { Component } from 'react';
 
