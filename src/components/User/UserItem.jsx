@@ -9,7 +9,7 @@ export const UserItem = ({
   username,
   email,
   avatarUrl,
-  address: { street, city },
+
   userDelete,
   changeJob,
   hasJob,
@@ -24,9 +24,7 @@ export const UserItem = ({
         <p>UserName: {username}</p>
         <p>email: {email}</p>
         <img src={avatarUrl} alt={name} />
-        <p>
-          address:{street},{city}
-        </p>
+
         <Title>Has Job : {`${hasJob}`}</Title>
       </li>
       <StyledBtn onClick={() => userDelete(id)}>Delete</StyledBtn>
@@ -40,9 +38,4 @@ UserItem.propTypes = {
   username: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   avatarUrl: PropTypes.string.isRequired,
-  address: PropTypes.shape({
-    street: PropTypes.string,
-    city: PropTypes.string,
-    geo: PropTypes.objectOf(PropTypes.string),
-  }),
 };
