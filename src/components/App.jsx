@@ -6,12 +6,32 @@ import Button from './Button/Button';
 // import Form from './Form/Form';
 import FormikForm from './Form/FormikForm';
 import { Component } from 'react';
+import Modal from './Modal/Modal';
 
+const USERS_KEY = 'users';
 class App extends Component {
   state = {
     users: data,
     isShowForm: false,
+    userInfo: null,
   };
+
+  componentDidMount() {
+    const parse = JSON.parse(localStorage.getItem(USERS_KEY));
+    if (parse && parse.length > 0) {
+      this.setState({
+        users: parse,
+      });
+    } else {
+      this.setState({
+        users: data,
+      });
+    }
+  }
+  componentDidUpdate(_, prevState) {
+    if (prevState.users !== this.state.users)
+      localStorage.setItem(USERS_KEY, JSON.stringify(this.state.users));
+  }
 
   userDelete = usersId => {
     this.setState(prevState => {
@@ -49,26 +69,35 @@ class App extends Component {
     });
   };
 
+  showUserDetails = data => {
+    this.setState({ userInfo: data });
+  };
+  closeUserDetails = () => {
+    this.setState({ userInfo: null });
+  };
+
   render() {
-    const { users, isShowForm } = this.state;
+    const { users, isShowForm, userInfo } = this.state;
     return (
       <Section title={'userlist'}>
         <UsersList
           userDelete={this.userDelete}
           changeStat={this.changeStatus}
           users={users}
+          showUserDetails={this.showUserDetails}
         />
-
         {/* {isShowForm ? (
           <Form addUser={this.addUser} />
         ) : (
           <Button text="Open modal" handleClick={this.openForm} />
         )} */}
-
         {isShowForm ? (
           <FormikForm addUser={this.addUser} closeForm={this.closeForm} />
         ) : (
           <Button text="Open modal" handleClick={this.openForm} />
+        )}
+        {userInfo && (
+          <Modal userInfo={userInfo} closeUserDetails={this.closeUserDetails} />
         )}
       </Section>
     );

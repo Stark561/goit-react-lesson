@@ -13,8 +13,10 @@ export const UserItem = ({
   userDelete,
   changeJob,
   hasJob,
+  showUserDetails,
 }) => {
   const isEndedBiz = email.endsWith('biz');
+
   return (
     <Section>
       <li>
@@ -28,6 +30,9 @@ export const UserItem = ({
         <Title>Has Job : {`${hasJob}`}</Title>
       </li>
       <StyledBtn onClick={() => userDelete(id)}>Delete</StyledBtn>
+      <StyledBtn onClick={() => showUserDetails({ name, email, avatarUrl })}>
+        Show details
+      </StyledBtn>
       <StyledBtn onClick={() => changeJob(id)}>Change user status</StyledBtn>
     </Section>
   );
@@ -38,4 +43,7 @@ UserItem.propTypes = {
   username: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   avatarUrl: PropTypes.string.isRequired,
+  userDelete: PropTypes.func.isRequired,
+  changeJob: PropTypes.func.isRequired,
+  showUserDetails: PropTypes.func.isRequired,
 };
