@@ -6,3 +6,8 @@ export async function fetchUsers(skip, limit) {
   const data = await axios({ params: { skip, limit } });
   return data;
 }
+
+export async function postUser(user) {
+  const { data } = await axios.post('/add', user);
+  return data;
+}

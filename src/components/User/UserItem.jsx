@@ -11,8 +11,7 @@ export const UserItem = ({
   image,
 
   userDelete,
-  changeJob,
-  hasJob,
+
   showUserDetails,
 }) => {
   const isEndedBiz = email.endsWith('biz');
@@ -26,14 +25,11 @@ export const UserItem = ({
 
         <p>email: {email}</p>
         <img src={image} alt={firstName} />
-
-        {/* <Title>Has Job : {`${hasJob}`}</Title> */}
       </li>
       <StyledBtn onClick={() => userDelete(id)}>Delete</StyledBtn>
       <StyledBtn onClick={() => showUserDetails({ firstName, email, image })}>
         Show details
       </StyledBtn>
-      <StyledBtn onClick={() => changeJob(id)}>Change user status</StyledBtn>
     </Section>
   );
 };
@@ -43,6 +39,6 @@ UserItem.propTypes = {
   email: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   userDelete: PropTypes.func.isRequired,
-  // changeJob: PropTypes.func.isRequired,
+
   showUserDetails: PropTypes.func.isRequired,
 };
