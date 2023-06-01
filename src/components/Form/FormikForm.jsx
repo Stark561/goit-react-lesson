@@ -5,7 +5,7 @@ class FormikForm extends Component {
   render() {
     return (
       <Formik
-        initialValues={{ name: '', email: '' }}
+        initialValues={{ firstName: '', email: '' }}
         onSubmit={values => {
           this.props.addUser(values);
           this.props.closeForm();
@@ -19,8 +19,8 @@ class FormikForm extends Component {
                 <input
                   onChange={formik.handleChange}
                   type="text"
-                  name="name"
-                  value={formik.values.name}
+                  name="firstName"
+                  value={formik.values.firstName}
                 />
               </label>
 
