@@ -1,12 +1,13 @@
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 import { UsersList } from './usersList/usersList';
 import Section from './Section/Section';
 import Button from './Button/Button';
 // import Form from './Form/Form';
 import FormikForm from './Form/FormikForm';
-import { Component, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Modal from './Modal/Modal';
-import { fetchUsers, postUser } from 'services/users-api';
+import { fetchUsers, getSearchUsers, postUser } from 'services/users-api';
+import SearchForm from './SearchForm/SearchForm';
 
 const LIMIT = 10;
 const SKIP = 10;
@@ -17,7 +18,7 @@ function App() {
   const [userInfo, setUserInfo] = useState(null);
   const [isShowUsers, setIsShowUsers] = useState(false);
   const [page, setPage] = useState(1);
-
+  const [query, setQuery] = useState('');
   const [error, setError] = useState('');
   const [loader, setLoader] = useState(false);
 
@@ -27,8 +28,8 @@ function App() {
     }
   }, [isShowUsers, page]);
 
-  const getUsers = async page => {
-    const skip = SKIP * page - LIMIT;
+  const getUsers = async pageNumber => {
+    const skip = SKIP * pageNumber - LIMIT;
     setLoader(true);
     try {
       const {
@@ -36,6 +37,32 @@ function App() {
       } = await fetchUsers(skip, LIMIT);
 
       setUsers(prev => (prev ? [...prev, ...users] : users));
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoader(false);
+    }
+  };
+
+  const resultBySearch = query => {
+    setPage(1);
+    setQuery(query);
+  };
+
+  useEffect(() => {
+    if (page === 1) setUsers(null);
+    query && getUserBySearch(query, page);
+  }, [query, page]);
+
+  const getUserBySearch = async (query, pageNumber) => {
+    setError('');
+    setLoader(true);
+    const skip = SKIP * pageNumber - LIMIT;
+    try {
+      const { users, total } = await getSearchUsers(query, skip, LIMIT);
+      total
+        ? setUsers(prev => (prev ? [...prev, ...users] : users))
+        : setError('Didn`t match');
     } catch (error) {
       setError(error.message);
     } finally {
@@ -92,6 +119,7 @@ function App() {
 
   return (
     <Section title={'userlist'}>
+      <SearchForm resultBySearch={resultBySearch} />
       <Button
         text={isShowUsers ? 'Hide users' : 'Show users'}
         handleClick={changeVisibleUsers}
@@ -107,7 +135,9 @@ function App() {
             users={users}
             showUserDetails={showUserDetails}
           />
-          <Button text={'Load more'} handleClick={changePage} />
+          {users.length > LIMIT && (
+            <Button text={'Load more'} handleClick={changePage} />
+          )}
         </>
       )}
 
