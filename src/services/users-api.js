@@ -11,3 +11,10 @@ export async function postUser(user) {
   const { data } = await axios.post('/add', user);
   return data;
 }
+
+export async function getSearchUsers(query, skip, limit) {
+  const { data } = await axios('/search', {
+    params: { q: query, skip, limit },
+  });
+  return data;
+}
