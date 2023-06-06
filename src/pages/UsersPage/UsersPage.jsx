@@ -1,7 +1,9 @@
 import Button from 'components/Button/Button';
 import SearchForm from 'components/SearchForm/SearchForm';
 import { UsersList } from 'components/usersList/usersList';
+import { useMemo } from 'react';
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { getSearchUsers } from 'services/users-api';
 
 const LIMIT = 10;
@@ -12,10 +14,16 @@ function UsersPage() {
   const [totalUsers, setTotalUsers] = useState(0);
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const resultBySearch = query => {
+  const querySearch = useMemo(
+    () => searchParams.get('search') ?? '',
+    [searchParams]
+  );
+
+  const resultBySearch = () => {
     setPage(1);
-    setQuery(query);
+    setQuery(querySearch);
   };
 
   const changePage = () => {
@@ -42,7 +50,11 @@ function UsersPage() {
 
   return (
     <>
-      <SearchForm resultBySearch={resultBySearch} />
+      <SearchForm
+        resultBySearch={resultBySearch}
+        setSearchParams={setSearchParams}
+        querySearch={querySearch}
+      />
       {/* {loader && <p>Loading...</p>}
       {error && <h2>{error}</h2>} */}
 

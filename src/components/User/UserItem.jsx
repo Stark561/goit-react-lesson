@@ -2,19 +2,18 @@ import PropTypes from 'prop-types';
 import Section from 'components/Section/Section';
 import { NativeText, Title } from './User.styled';
 import { StyledBtn } from './User.styled';
-import { Link } from 'react-router-dom';
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Suspense } from 'react';
 
-export const UserItem = ({
-  isUserInfoShow,
-
-  id,
-  firstName,
-
-  email,
-  image,
-}) => {
+export const UserItem = ({ isUserInfoShow, id, firstName, email, image }) => {
   const isEndedBiz = email.endsWith('biz');
+  const location = useLocation();
+  const navigate = useNavigate();
 
+  const handleClick = route => {
+    navigate(route);
+  };
+  // console.log(location);
   return (
     <Section>
       <li>
@@ -25,7 +24,19 @@ export const UserItem = ({
         <p>email: {email}</p>
         <img src={image} alt={firstName} />
       </li>
-      {!isUserInfoShow && <Link to={`users/${id}`}>Show details</Link>}
+      {!isUserInfoShow ? (
+        <Link to={location.pathname === '/users' ? `${id}` : `users/${id}`}>
+          Show details
+        </Link>
+      ) : (
+        <>
+          <StyledBtn onClick={() => handleClick('todos')}>Todos </StyledBtn>
+          <StyledBtn onClick={() => handleClick('posts')}>Posts </StyledBtn>
+        </>
+      )}
+      <Suspense>
+        <Outlet />
+      </Suspense>
     </Section>
   );
 };

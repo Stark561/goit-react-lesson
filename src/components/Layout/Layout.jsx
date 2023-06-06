@@ -1,4 +1,5 @@
 import Navigate from 'components/Navigate/Navigate';
+import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 
 function Layout() {
@@ -9,7 +10,9 @@ function Layout() {
       </header>
 
       <main>
-        <Outlet />
+        <Suspense>
+          <Outlet />
+        </Suspense>
       </main>
     </>
   );
