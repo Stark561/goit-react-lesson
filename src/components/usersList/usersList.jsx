@@ -1,14 +1,13 @@
 import PropTypes from 'prop-types';
 import { UserItem } from '../User/UserItem';
 
-export const UsersList = ({ users, userDelete, showUserDetails }) => {
+export const UsersList = ({ users }) => {
   return (
     <ul>
       {users.map(user => (
         <UserItem
           key={user.id}
-          userDelete={userDelete}
-          showUserDetails={showUserDetails}
+        
           {...user}
         />
       ))}
@@ -24,6 +23,4 @@ UsersList.propTypes = {
       ]),
     }).isRequired
   ).isRequired,
-  userDelete: PropTypes.func.isRequired,
-  showUserDetails: PropTypes.func.isRequired,
 };

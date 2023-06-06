@@ -18,3 +18,8 @@ export async function getSearchUsers(query, skip, limit) {
   });
   return data;
 }
+
+export async function getUserDetails(userId) {
+  const { data } = await axios(`/${userId}`);
+  return data;
+}
