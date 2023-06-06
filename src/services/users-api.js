@@ -23,3 +23,12 @@ export async function getUserDetails(userId) {
   const { data } = await axios(`/${userId}`);
   return data;
 }
+
+export async function getPosts(userId) {
+  const { data } = await axios(`/${userId}/posts`);
+  return data;
+}
+export async function getTodos(userId) {
+  const { data } = await axios(`/${userId}/todos`);
+  return data;
+}

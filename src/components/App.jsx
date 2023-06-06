@@ -2,9 +2,14 @@ import { Route, Routes } from 'react-router-dom';
 
 import Layout from './Layout/Layout';
 import HomePage from 'pages/HomePage/HomePage';
-import UsersPage from 'pages/UsersPage/UsersPage';
+import { lazy } from 'react';
 
-import UserDateilsPage from 'pages/UserDateilsPage/UserDateilsPage';
+const UsersPage = lazy(() => import('pages/UsersPage/UsersPage'));
+const UserDateilsPage = lazy(() =>
+  import('pages/UserDateilsPage/UserDateilsPage')
+);
+const Todos = lazy(() => import('./Todos/Todos'));
+const Posts = lazy(() => import('./Posts/Posts'));
 
 function App() {
   return (
@@ -12,7 +17,10 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route index element={<HomePage />} />
         <Route path="users" element={<UsersPage />} />
-        <Route path="users/:id" element={<UserDateilsPage />} />
+        <Route path="users/:id" element={<UserDateilsPage />}>
+          <Route path="todos" element={<Todos />} />
+          <Route path="posts" element={<Posts />} />
+        </Route>
       </Route>
     </Routes>
   );
