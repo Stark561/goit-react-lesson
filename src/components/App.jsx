@@ -3,6 +3,8 @@ import { Route, Routes } from 'react-router-dom';
 import Layout from './Layout/Layout';
 import HomePage from 'pages/HomePage/HomePage';
 import { lazy } from 'react';
+import TodoPage from 'pages/TodoPage/TodoPage';
+import CreateTodoPage from 'pages/CreateTodoPage/CreateTodoPage';
 
 const UsersPage = lazy(() => import('pages/UsersPage/UsersPage'));
 const UserDateilsPage = lazy(() =>
@@ -21,6 +23,8 @@ function App() {
           <Route path="todos" element={<Todos />} />
           <Route path="posts" element={<Posts />} />
         </Route>
+        <Route path="todo" element={<TodoPage />} />
+        <Route path="create/todo" element={<CreateTodoPage />} />
       </Route>
     </Routes>
   );
