@@ -10,6 +10,13 @@ function Navigate() {
         <li>
           <StyledNavLink to="/users">Users</StyledNavLink>
         </li>
+
+        <li>
+          <StyledNavLink to="/todo">Todo page</StyledNavLink>
+        </li>
+        <li>
+          <StyledNavLink to="/create/todo">Create todo page </StyledNavLink>
+        </li>
       </ul>
     </nav>
   );
