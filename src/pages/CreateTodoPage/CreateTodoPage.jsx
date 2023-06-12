@@ -1,11 +1,10 @@
-import { nanoid } from 'nanoid';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addTodoAction } from 'store/todo/actions';
+// import { addTodoAction } from 'store/todo/actions';
+import { addTodo } from 'store/todo/todoSlice';
 
 function CreateTodoPage() {
   const [task, setTask] = useState('');
-
   const dispatch = useDispatch();
 
   const handleChange = ({ target: { value } }) => {
@@ -16,7 +15,7 @@ function CreateTodoPage() {
     evt.preventDefault();
     if (!task.trim()) return;
 
-    dispatch(addTodoAction({ todoName: task, id: nanoid() }));
+    dispatch(addTodo(task));
     setTask('');
   };
 
