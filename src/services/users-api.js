@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://dummyjson.com/users';
+// axios.defaults.baseURL = 'https://dummyjson.com/users';
+axios.defaults.baseURL = 'https://api.escuelajs.co/api/v1/products';
 
 export async function fetchUsers(skip, limit) {
   const data = await axios({ params: { skip, limit } });
@@ -9,6 +10,10 @@ export async function fetchUsers(skip, limit) {
 
 export async function postUser(user) {
   const { data } = await axios.post('/add', user);
+  return data;
+}
+export async function deleteUser(userId) {
+  const { data } = await axios.delete(`/${userId}`);
   return data;
 }
 
