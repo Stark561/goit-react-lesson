@@ -1,37 +1,28 @@
 import Button from 'components/Button/Button';
 import { UsersList } from 'components/usersList/usersList';
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchUsers } from 'services/users-api';
+import { getUsersThunk } from 'store/users/usersOperations';
+import { selectUsers } from 'store/users/usersSelectors';
 
 const LIMIT = 10;
 const SKIP = 10;
 
 function HomePage() {
-  const [users, setUsers] = useState(null);
+  // const [users, setUsers] = useState(null);
+  const dispatch = useDispatch();
   const [page, setPage] = useState(1);
-  const [loader, setLoader] = useState(false);
-  const [error, setError] = useState('');
-  const [totalUsers, setTotalUsers] = useState(0);
+  // const [loader, setLoader] = useState(false);
+  // const [error, setError] = useState('');
+  // const [totalUsers, setTotalUsers] = useState(0);
+  // const { users } = selectUsers(state);
+  const { users, totalUsers, isLoading, error } = useSelector(selectUsers);
 
   useEffect(() => {
-    getUsers(page);
-  }, [page]);
-
-  const getUsers = async pageNumber => {
-    const skip = SKIP * pageNumber - LIMIT;
-    setLoader(true);
-    try {
-      const {
-        data: { users, total },
-      } = await fetchUsers(skip, LIMIT);
-      setTotalUsers(total);
-      setUsers(prev => (prev ? [...prev, ...users] : users));
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setLoader(false);
-    }
-  };
+    const skip = SKIP * page - LIMIT;
+    users.length === 0 && dispatch(getUsersThunk(skip, LIMIT));
+  }, [dispatch, page, users.length]);
 
   const changePage = () => {
     setPage(prev => prev + 1);
