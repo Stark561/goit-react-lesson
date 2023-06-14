@@ -5,6 +5,8 @@ import HomePage from 'pages/HomePage/HomePage';
 import { lazy } from 'react';
 import TodoPage from 'pages/TodoPage/TodoPage';
 import CreateTodoPage from 'pages/CreateTodoPage/CreateTodoPage';
+import RegistrationPage from 'pages/RegistrationPage/RegistrationPage';
+import LogInPage from 'pages/LogInPage/LogInPage';
 
 const UsersPage = lazy(() => import('pages/UsersPage/UsersPage'));
 const UserDateilsPage = lazy(() =>
@@ -16,8 +18,11 @@ const Posts = lazy(() => import('./Posts/Posts'));
 function App() {
   return (
     <Routes>
+      <Route path="/registration" element={<RegistrationPage />} />
+      <Route path="/login" element={<LogInPage />} />
       <Route path="/" element={<Layout />}>
         <Route index element={<HomePage />} />
+
         <Route path="users" element={<UsersPage />} />
         <Route path="users/:id" element={<UserDateilsPage />}>
           <Route path="todos" element={<Todos />} />
