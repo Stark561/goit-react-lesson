@@ -17,6 +17,13 @@ function Navigate() {
         <li>
           <StyledNavLink to="/create/todo">Create todo page </StyledNavLink>
         </li>
+
+        <li>
+          <StyledNavLink to="/registration">Registration</StyledNavLink>
+        </li>
+        <li>
+          <StyledNavLink to="/login">Log in</StyledNavLink>
+        </li>
       </ul>
     </nav>
   );
