@@ -29,6 +29,16 @@ const authSlice = createSlice({
         state.name = payload.name;
       });
   },
+  reducers: {
+    logOut: state => {
+      state.islogIn = false;
+      state.token = '';
+      state.name = '';
+      state.erorMessage = '';
+      state.loading = false;
+    },
+  },
 });
 
 export const authReducer = authSlice.reducer;
+export const { logOut } = authSlice.actions;

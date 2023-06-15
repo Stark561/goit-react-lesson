@@ -1,6 +1,15 @@
+import { logOut } from 'store/auth/authSlice';
 import { StyledNavLink } from './Navigate.styled';
+import { useDispatch, useSelector } from 'react-redux';
 
 function Navigate() {
+  const { islogIn } = useSelector(state => state.auth);
+  const dispatch = useDispatch();
+
+  const onLogOutBtnClick = () => {
+    dispatch(logOut());
+  };
+
   return (
     <nav>
       <ul>
@@ -17,13 +26,18 @@ function Navigate() {
         <li>
           <StyledNavLink to="/create/todo">Create todo page </StyledNavLink>
         </li>
-
-        <li>
-          <StyledNavLink to="/registration">Registration</StyledNavLink>
-        </li>
-        <li>
-          <StyledNavLink to="/login">Log in</StyledNavLink>
-        </li>
+        {!islogIn ? (
+          <>
+            <li>
+              <StyledNavLink to="/registration">Registration</StyledNavLink>
+            </li>
+            <li>
+              <StyledNavLink to="/login">Log in</StyledNavLink>
+            </li>
+          </>
+        ) : (
+          <button onClick={onLogOutBtnClick}>Log out</button>
+        )}
       </ul>
     </nav>
   );
