@@ -1,13 +1,15 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
 import { registretionuser } from 'services/users-api';
+import { logInAsynk } from 'store/auth/authOperations';
 
 function RegistrationPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const onSubmitForm = evt => {
     evt.preventDefault();
@@ -18,7 +20,9 @@ function RegistrationPage() {
       password,
       avatar: 'https://api.lorem.space/image/face?w=640&h=480&r=867',
     };
-    registretionuser(sendedObj).then(() => navigate('/login'));
+    registretionuser(sendedObj).then(() =>
+      dispatch(logInAsynk({ password, email }))
+    );
   };
 
   return (

@@ -22,9 +22,7 @@ function LogInPage() {
     evt.preventDefault();
 
     const sendedObj = { email, password };
-    dispatch(logInAsynk(sendedObj))
-      .unwrap()
-      .then(() => dispatch(getUserNameAsynk()));
+    dispatch(logInAsynk(sendedObj));
   };
 
   return (
